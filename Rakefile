@@ -10,3 +10,6 @@ task default: :spec
 
 desc 'Run all specs in spec directory'
 RSpec::Core::RakeTask.new(:spec)
+
+desc "Run CI tasks"
+task ci: [:spec]
