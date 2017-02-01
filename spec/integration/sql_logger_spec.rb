@@ -8,7 +8,7 @@ RSpec.describe Dry::Monitor::SQL::Logger do
   end
 
   let(:log_file_path) do
-    SPEC_ROOT.join('../tmp/sql.log')
+    SPEC_ROOT.join('test_logs/sql.log')
   end
 
   let(:log_file_content) { File.read(log_file_path) }

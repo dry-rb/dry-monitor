@@ -12,7 +12,7 @@ RSpec.describe Dry::Monitor::Rack::Middleware do
   end
 
   let(:log_file_path) do
-    SPEC_ROOT.join('../tmp/middleware.log')
+    SPEC_ROOT.join('test_logs/middleware.log')
   end
 
   let(:rack_logger) do
