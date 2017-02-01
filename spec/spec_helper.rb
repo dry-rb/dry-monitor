@@ -1,3 +1,10 @@
+if RUBY_ENGINE == 'ruby' && ENV['CI'] == 'true'
+  require 'simplecov'
+  SimpleCov.start do
+    add_filter '/spec/'
+  end
+end
+
 begin
   require 'byebug'
 rescue LoadError; end
