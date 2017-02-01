@@ -2,12 +2,12 @@
 require File.expand_path('../lib/dry/monitor/version', __FILE__)
 
 Gem::Specification.new do |spec|
-  spec.name          = 'dry-logic'
+  spec.name          = 'dry-monitor'
   spec.version       = Dry::Monitor::VERSION
   spec.authors       = ['Piotr Solnica']
   spec.email         = ['piotr.solnica@gmail.com']
   spec.summary       = 'Monitoring and instrumentation APIs'
-  spec.homepage      = 'https://github.com/dryrb/dry-logic'
+  spec.homepage      = 'https://github.com/dry-rb/dry-monitor'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0")
