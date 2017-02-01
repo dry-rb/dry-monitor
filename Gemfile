@@ -8,4 +8,5 @@ group :tools do
   gem 'guard-rspec'
   gem 'guard-rubocop'
   gem 'byebug', platform: :mri
+  gem 'rack'
 end
