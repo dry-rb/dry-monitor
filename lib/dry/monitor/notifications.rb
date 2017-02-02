@@ -40,7 +40,7 @@ module Dry
       end
 
       def event(id, info = {})
-        events[id] = Event.new(id, info)
+        events[id] = Event.new(id, info) unless events.key?(id)
         self
       end
 
