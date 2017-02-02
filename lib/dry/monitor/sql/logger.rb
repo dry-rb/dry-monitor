@@ -9,17 +9,20 @@ module Dry
 
         setting :theme, Rouge::Themes::Gruvbox
         setting :colorize, true
+        setting :message_template, %(  Loaded %s in %sms %s).freeze
 
         attr_reader :config
         attr_reader :logger
         attr_reader :formatter
         attr_reader :lexer
+        attr_reader :template
 
         def initialize(logger, config = self.class.config)
           @logger = logger
           @config = config
           @formatter = Rouge::Formatters::Terminal256.new(config.theme)
           @lexer = Rouge::Lexers::SQL.new
+          @template = config.message_template
         end
 
         def subscribe(notifications)
@@ -29,7 +32,7 @@ module Dry
         end
 
         def log_query(time, name, query)
-          logger.info "  Loaded #{name.inspect} in #{time}ms #{colorize(query)}"
+          logger.info template % [name.inspect, time, colorize(query)]
         end
 
         private

@@ -15,7 +15,7 @@ module Dry
         QUERY_PARAMS = 'QUERY_PARAMS'.freeze
 
         START_MSG = %(Started %s "%s" for %s at %s).freeze
-        STOP_MSG = %(Finished %s "%s" for %s in %sms [Status: %s]).freeze
+        STOP_MSG = %(Finished %s "%s" for %s in %sms [Status: %s]\n).freeze
         PARAMS_MSG = %(  Parameters %s).freeze
         QUERY_MSG = %(  Query parameters %s).freeze
         FILTERED = '[FILTERED]'.freeze
