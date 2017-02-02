@@ -30,7 +30,7 @@ RSpec.describe Dry::Monitor::Rack::Middleware do
 
     before do
       File.open(log_file_path, 'w').close
-      rack_logger.subscribe(middleware)
+      rack_logger.attach(middleware)
     end
 
     it 'triggers start/stop events for with a rack request' do

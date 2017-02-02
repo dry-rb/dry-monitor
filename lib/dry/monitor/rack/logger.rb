@@ -29,7 +29,7 @@ module Dry
           @config = config
         end
 
-        def subscribe(rack_monitor)
+        def attach(rack_monitor)
           rack_monitor.on(:start) do |id, payload|
             log_start_request(payload[:env])
           end
