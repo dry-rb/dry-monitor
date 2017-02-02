@@ -29,16 +29,16 @@ module Dry
           @config = config
         end
 
-        def subscribe(notifications)
-          notifications.subscribe(Middleware::REQUEST_START) do |id, payload|
+        def subscribe(rack_monitor)
+          rack_monitor.on(:start) do |id, payload|
             log_start_request(payload[:env])
           end
 
-          notifications.subscribe(Middleware::REQUEST_STOP) do |id, payload|
+          rack_monitor.on(:stop) do |id, payload|
             log_stop_request(payload[:env], payload[:status], payload[:time])
           end
 
-          notifications.subscribe(Middleware::APP_ERROR) do |id, payload|
+          rack_monitor.on(:error) do |id, payload|
             log_exception(payload[:exception], payload[:name])
           end
         end

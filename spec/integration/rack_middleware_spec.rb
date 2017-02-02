@@ -30,7 +30,7 @@ RSpec.describe Dry::Monitor::Rack::Middleware do
 
     before do
       File.open(log_file_path, 'w').close
-      rack_logger.subscribe(notifications)
+      rack_logger.subscribe(middleware)
     end
 
     it 'triggers start/stop events for with a rack request' do
@@ -46,6 +46,20 @@ RSpec.describe Dry::Monitor::Rack::Middleware do
       expect(log_file_content).to include('Started GET "/hello-world"')
       expect(log_file_content).to include('Finished GET "/hello-world"')
       expect(log_file_content).to include('Query parameters {"_csrf"=>"[FILTERED]", "password"=>"[FILTERED]", "user"=>{"password"=>"[FILTERED]"}, "other"=>[{"password"=>"[FILTERED]"}, {"password"=>"[FILTERED]"}], "foo"=>"bar", "one"=>"1"}')
+    end
+  end
+
+  describe '#on' do
+    it 'subscribe a listener to a specific request event' do
+      captured = []
+
+      middleware.on(:error) do |id, payload|
+        captured << payload
+      end
+
+      notifications.instrument(:'rack.request.error', exception: 'oops')
+
+      expect(captured).to eql([exception: 'oops'])
     end
   end
 end
