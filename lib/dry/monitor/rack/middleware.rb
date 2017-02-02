@@ -27,6 +27,10 @@ module Dry
           notifications.subscribe(:"rack.request.#{event_id}", &block)
         end
 
+        def instrument(event_id, *args, &block)
+          notifications.instrument(:"rack.request.#{event_id}", *args, &block)
+        end
+
         def call(env)
           notifications.start(REQUEST_START, env: env)
           response, time = CLOCK.measure { app.call(env) }

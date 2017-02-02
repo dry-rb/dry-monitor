@@ -57,7 +57,7 @@ RSpec.describe Dry::Monitor::Rack::Middleware do
         captured << payload
       end
 
-      notifications.instrument(:'rack.request.error', exception: 'oops')
+      middleware.instrument(:error, exception: 'oops')
 
       expect(captured).to eql([exception: 'oops'])
     end
