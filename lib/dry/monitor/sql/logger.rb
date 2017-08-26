@@ -7,7 +7,7 @@ module Dry
       class Logger
         extend Dry::Configurable
 
-        setting :theme, Rouge::Themes::Gruvbox
+        setting :theme, Rouge::Themes::Gruvbox.new
         setting :colorize, true
         setting :message_template, %(  Loaded %s in %sms %s).freeze
 
