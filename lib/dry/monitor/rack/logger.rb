@@ -12,7 +12,7 @@ module Dry
         PATH_INFO = 'PATH_INFO'.freeze
         REMOTE_ADDR = 'REMOTE_ADDR'.freeze
         RACK_INPUT = 'rack.input'.freeze
-        QUERY_PARAMS = 'QUERY_PARAMS'.freeze
+        QUERY_STRING = 'QUERY_STRING'.freeze
 
         START_MSG = %(Started %s "%s" for %s at %s).freeze
         STOP_MSG = %(Finished %s "%s" for %s in %sms [Status: %s]\n).freeze
@@ -69,7 +69,7 @@ module Dry
         end
 
         def log_request_params(request)
-          with_http_params(request[QUERY_PARAMS]) do |params|
+          with_http_params(request[QUERY_STRING]) do |params|
             info QUERY_MSG % [params.inspect]
           end
         end
