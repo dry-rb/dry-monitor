@@ -53,8 +53,8 @@ RSpec.describe Dry::Monitor::Rack::Middleware do
     it 'subscribe a listener to a specific request event' do
       captured = []
 
-      middleware.on(:error) do |id, payload|
-        captured << payload
+      middleware.on(:error) do |event|
+        captured << event.payload
       end
 
       middleware.instrument(:error, exception: 'oops')

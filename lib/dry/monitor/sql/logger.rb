@@ -1,8 +1,11 @@
 require 'dry-configurable'
 require 'rouge'
+require 'dry/monitor/notifications'
 
 module Dry
   module Monitor
+    Notifications.register_event(:sql)
+
     module SQL
       class Logger
         extend Dry::Configurable
@@ -26,8 +29,8 @@ module Dry
         end
 
         def subscribe(notifications)
-          notifications.event(:sql).subscribe(:sql) do |time, id, payload|
-            log_query(time, payload[:name], payload[:query])
+          notifications.subscribe(:sql) do |time:, name:, query:|
+            log_query(time, name, query)
           end
         end
 

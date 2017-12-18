@@ -1,3 +1,5 @@
+require 'dry/events/publisher'
+
 module Dry
   module Monitor
     class Clock
@@ -15,38 +17,16 @@ module Dry
 
     CLOCK = Clock.new
 
-    class Event
-      attr_reader :id
-
-      attr_reader :info
-
-      def initialize(id, info = {})
-        @id = id
-        @info = info
-      end
-    end
-
     class Notifications
+      include Events::Publisher['Dry::Monitor::Notifications']
+
       attr_reader :id
-      attr_reader :events
-      attr_reader :listeners
+
       attr_reader :clock
 
       def initialize(id)
         @id = id
-        @listeners = Hash.new { |h, k| h[k] = [] }
-        @events = {}
         @clock = CLOCK
-      end
-
-      def event(id, info = {})
-        events[id] = Event.new(id, info) unless events.key?(id)
-        self
-      end
-
-      def subscribe(event_id, listener = nil, &block)
-        listeners[event_id] << (listener || block)
-        self
       end
 
       def start(event_id, payload)
@@ -57,18 +37,16 @@ module Dry
         instrument(event_id, payload)
       end
 
-      def instrument(event_id, payload = nil, &block)
-        event = events[event_id]
-
+      def instrument(event_id, payload = EMPTY_HASH, &block)
         if block
           result, time = clock.measure(&block)
         end
 
-        listeners[event_id].each do |listener|
+        process(event_id, payload) do |event, listener|
           if time
-            listener.(time, event.id, payload.merge(event.info))
+            listener.(event.payload(payload.merge(time: time)))
           else
-            listener.(event.id, payload.merge(event.info))
+            listener.(event)
           end
         end
 

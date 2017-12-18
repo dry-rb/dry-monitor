@@ -1,4 +1,5 @@
 require 'rack/utils'
+require 'dry/monitor/notifications'
 
 module Dry
   module Monitor
@@ -8,15 +9,16 @@ module Dry
         REQUEST_STOP = :'rack.request.stop'
         REQUEST_ERROR = :'rack.request.error'
 
+        Notifications.register_event(REQUEST_START)
+        Notifications.register_event(REQUEST_STOP)
+        Notifications.register_event(REQUEST_ERROR)
+
         attr_reader :app
+
         attr_reader :notifications
 
         def initialize(*args)
           @notifications, @app = *args
-
-          notifications.event(REQUEST_START)
-          notifications.event(REQUEST_STOP)
-          notifications.event(REQUEST_ERROR)
         end
 
         def new(app)

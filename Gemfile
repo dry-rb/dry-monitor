@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 gemspec
 
+gem 'dry-events', git: 'https://github.com/dry-rb/dry-events.git', branch: 'master'
+
 group :test do
   gem 'rack'
   gem 'simplecov', platform: :mri, require: false

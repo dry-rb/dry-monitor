@@ -30,16 +30,16 @@ module Dry
         end
 
         def attach(rack_monitor)
-          rack_monitor.on(:start) do |id, payload|
-            log_start_request(payload[:env])
+          rack_monitor.on(:start) do |env:|
+            log_start_request(env)
           end
 
-          rack_monitor.on(:stop) do |id, payload|
-            log_stop_request(payload[:env], payload[:status], payload[:time])
+          rack_monitor.on(:stop) do |env:, status:, time:|
+            log_stop_request(env, status, time)
           end
 
-          rack_monitor.on(:error) do |id, payload|
-            log_exception(payload[:exception], payload[:name])
+          rack_monitor.on(:error) do |exception:, name:|
+            log_exception(exception, name)
           end
         end
 

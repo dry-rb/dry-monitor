@@ -3,25 +3,17 @@ require 'spec_helper'
 RSpec.describe 'Subscribing to instrumentation events' do
   subject(:notifications) { Dry::Monitor::Notifications.new(:app) }
 
+  before do
+    Dry::Monitor::Notifications.register_event(:sql, { name: 'rom[sql]' })
+  end
+
   describe '#instrument' do
-    it 'allows subscribing listeners to specific events' do
-      payload = { query: 'SELECT 1 FROM users' }
-      captured = []
-      listener = -> id, payload { captured << [id, payload] }
-
-      notifications.event(:sql, { name: 'rom[sql]' }).subscribe(:sql, listener)
-
-      notifications.instrument(:sql, payload)
-
-      expect(captured).to eql([[:sql, { name: 'rom[sql]', query: 'SELECT 1 FROM users'}]])
-    end
-
     it 'allows subscribing via block' do
       captured = []
       payload = { query: 'SELECT 1 FROM users' }
 
-      notifications.event(:sql, { name: 'rom[sql]' }).subscribe(:sql) do |id, payload|
-        captured << [id, payload]
+      notifications.subscribe(:sql) do |event|
+        captured << [event.id, event.payload]
       end
 
       notifications.instrument(:sql, payload)
@@ -33,15 +25,15 @@ RSpec.describe 'Subscribing to instrumentation events' do
       captured = []
       payload = { query: 'SELECT 1 FROM users' }
 
-      notifications.event(:sql, { name: 'rom[sql]' }).subscribe(:sql) do |time, id, payload|
-        captured << [id, payload]
+      notifications.subscribe(:sql) do |event|
+        captured << [event.id, event.payload]
       end
 
       notifications.instrument(:sql, payload) do
         payload
       end
 
-      expect(captured).to eql([[:sql, { name: 'rom[sql]', query: 'SELECT 1 FROM users'}]])
+      expect(captured).to eql([[:sql, { name: 'rom[sql]', query: 'SELECT 1 FROM users', time: 0.0}]])
     end
   end
 end
