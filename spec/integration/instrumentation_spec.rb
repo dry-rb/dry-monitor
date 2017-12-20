@@ -13,12 +13,12 @@ RSpec.describe 'Subscribing to instrumentation events' do
       payload = { query: 'SELECT 1 FROM users' }
 
       notifications.subscribe(:sql) do |event|
-        captured << [event.id, event.payload]
+        captured << [event.id, event[:query]]
       end
 
       notifications.instrument(:sql, payload)
 
-      expect(captured).to eql([[:sql, { name: 'rom[sql]', query: 'SELECT 1 FROM users'}]])
+      expect(captured).to eql([[:sql, 'SELECT 1 FROM users']])
     end
 
     it 'allows instrumenting via block' do
@@ -26,14 +26,14 @@ RSpec.describe 'Subscribing to instrumentation events' do
       payload = { query: 'SELECT 1 FROM users' }
 
       notifications.subscribe(:sql) do |event|
-        captured << [event.id, event.payload]
+        captured << [event.id, event[:query]]
       end
 
       notifications.instrument(:sql, payload) do
         payload
       end
 
-      expect(captured).to eql([[:sql, { name: 'rom[sql]', query: 'SELECT 1 FROM users', time: 0.0}]])
+      expect(captured).to eql([[:sql, 'SELECT 1 FROM users']])
     end
   end
 end
