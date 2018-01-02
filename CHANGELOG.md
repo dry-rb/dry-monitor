@@ -1,5 +1,9 @@
 # v0.1.0 2018-01-02
 
+### Fixed
+
+* Query params are logged correctly via rack middleware (solnic)
+
 ### Changed
 
 * Uses `dry-events` for notifications (solnic)
