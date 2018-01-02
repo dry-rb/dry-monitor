@@ -11,12 +11,10 @@ module Dry
         REQUEST_METHOD = 'REQUEST_METHOD'.freeze
         PATH_INFO = 'PATH_INFO'.freeze
         REMOTE_ADDR = 'REMOTE_ADDR'.freeze
-        RACK_INPUT = 'rack.input'.freeze
-        QUERY_PARAMS = 'QUERY_PARAMS'.freeze
+        QUERY_STRING = 'QUERY_STRING'.freeze
 
         START_MSG = %(Started %s "%s" for %s at %s).freeze
         STOP_MSG = %(Finished %s "%s" for %s in %sms [Status: %s]\n).freeze
-        PARAMS_MSG = %(  Parameters %s).freeze
         QUERY_MSG = %(  Query parameters %s).freeze
         FILTERED = '[FILTERED]'.freeze
 
@@ -69,7 +67,7 @@ module Dry
         end
 
         def log_request_params(request)
-          with_http_params(request[QUERY_PARAMS]) do |params|
+          with_http_params(request[QUERY_STRING]) do |params|
             info QUERY_MSG % [params.inspect]
           end
         end
@@ -80,6 +78,7 @@ module Dry
 
         def with_http_params(params)
           params = ::Rack::Utils.parse_nested_query(params)
+
           if params.size > 0
             yield(filter_params(params))
           end

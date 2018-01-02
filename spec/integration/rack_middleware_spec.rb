@@ -21,7 +21,7 @@ RSpec.describe Dry::Monitor::Rack::Middleware do
 
   describe '#call' do
     let(:env) do
-      { 'REQUEST_METHOD' => 'GET', 'PATH_INFO' => '/hello-world', 'REMOTE_ADDR' => '0.0.0.0', 'QUERY_PARAMS' => query_params }
+      { 'REQUEST_METHOD' => 'GET', 'PATH_INFO' => '/hello-world', 'REMOTE_ADDR' => '0.0.0.0', 'QUERY_STRING' => query_params }
     end
 
     let(:query_params) do
