@@ -38,14 +38,14 @@ module Dry
             log_stop_request(env, status, time)
           end
 
-          rack_monitor.on(:error) do |exception:, name:|
-            log_exception(exception, name)
+          rack_monitor.on(:error) do |exception:|
+            log_exception(exception)
           end
         end
 
-        def log_exception(e, app_name)
+        def log_exception(e)
           logger.error e.message
-          logger.error filter_backtrace(e.backtrace, app_name).join("\n")
+          logger.error filter_backtrace(e.backtrace).join("\n")
         end
 
         def log_start_request(request)
@@ -85,7 +85,7 @@ module Dry
           end
         end
 
-        def filter_backtrace(backtrace, app_name)
+        def filter_backtrace(backtrace)
           # TODO: what do we want to do with this?
           backtrace.reject { |l| l.include?('gems') }
         end
