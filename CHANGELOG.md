@@ -1,3 +1,9 @@
+# v0.1.0 2018-01-02
+
+### Changed
+
+* Uses `dry-events` for notifications (solnic)
+
 # v0.0.3 2017-08-28
 
 ### Changed
