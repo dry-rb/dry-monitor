@@ -91,12 +91,12 @@ module Dry
 
         def filter_params(params)
           params.each_with_object({}) do |(k, v), h|
-            if v.is_a?(Hash)
+            if config.filtered_params.include?(k)
+              h.update(k => FILTERED)
+            elsif v.is_a?(Hash)
               h.update(k => filter_params(v))
             elsif v.is_a?(Array)
-              h.update(k => v.map { |m| filter_params(m) })
-            elsif config.filtered_params.include?(k)
-              h.update(k => FILTERED)
+              h.update(k => v.map { |m| m.is_a?(Hash) ? filter_params(m) : m })
             else
               h[k] = v
             end

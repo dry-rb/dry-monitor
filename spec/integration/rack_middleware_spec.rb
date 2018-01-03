@@ -25,7 +25,17 @@ RSpec.describe Dry::Monitor::Rack::Middleware do
     end
 
     let(:query_params) do
-      '_csrf=123456&password=secret&user[password]=secret&other[][password]=secret&other[][password]=secret&foo=bar&one=1'
+      %w[
+        _csrf=123456
+        password=secret
+        user[password]=secret
+        others[][password]=secret1
+        others[][password]=secret2
+        foo=bar
+        one=1
+        ids[]=1
+        ids[]=2
+      ].join('&')
     end
 
     before do
@@ -45,7 +55,7 @@ RSpec.describe Dry::Monitor::Rack::Middleware do
 
       expect(log_file_content).to include('Started GET "/hello-world"')
       expect(log_file_content).to include('Finished GET "/hello-world"')
-      expect(log_file_content).to include('Query parameters {"_csrf"=>"[FILTERED]", "password"=>"[FILTERED]", "user"=>{"password"=>"[FILTERED]"}, "other"=>[{"password"=>"[FILTERED]"}, {"password"=>"[FILTERED]"}], "foo"=>"bar", "one"=>"1"}')
+      expect(log_file_content).to include('Query parameters {"_csrf"=>"[FILTERED]", "password"=>"[FILTERED]", "user"=>{"password"=>"[FILTERED]"}, "others"=>[{"password"=>"[FILTERED]"}, {"password"=>"[FILTERED]"}], "foo"=>"bar", "one"=>"1", "ids"=>["1", "2"]}')
     end
   end
 
