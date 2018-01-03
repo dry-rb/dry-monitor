@@ -1,3 +1,9 @@
+# v0.1.1 2018-01-03
+
+### Fixed
+
+* Query params containing arrays of primitives (e.g. `?ids[]=1&ids[]=2`) no longer crash the logger (timriley)
+
 # v0.1.0 2018-01-02
 
 ### Fixed
