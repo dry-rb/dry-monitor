@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe 'Subscribing to instrumentation events' do
   subject(:notifications) { Dry::Monitor::Notifications.new(:app) }
 

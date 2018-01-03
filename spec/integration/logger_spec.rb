@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe Dry::Monitor::Logger do
   subject(:logger) do
     Dry::Monitor::Logger.new($stdout)
