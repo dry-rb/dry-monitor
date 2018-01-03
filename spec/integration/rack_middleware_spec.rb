@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe Dry::Monitor::Rack::Middleware do
   subject(:middleware) { Dry::Monitor::Rack::Middleware.new(notifications).new(rack_app) }
 
