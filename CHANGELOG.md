@@ -1,3 +1,9 @@
+# v0.1.2 2018-01-04
+
+### Fixed
+
+* Rack logger no longer prevents arbitrary payload in `:error` events (solnic)
+
 # v0.1.1 2018-01-03
 
 ### Fixed
