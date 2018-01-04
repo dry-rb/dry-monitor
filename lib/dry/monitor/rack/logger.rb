@@ -36,8 +36,8 @@ module Dry
             log_stop_request(env, status, time)
           end
 
-          rack_monitor.on(:error) do |exception:|
-            log_exception(exception)
+          rack_monitor.on(:error) do |event|
+            log_exception(event[:exception])
           end
         end
 

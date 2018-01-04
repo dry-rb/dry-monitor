@@ -17,16 +17,15 @@ RSpec.describe Dry::Monitor::Rack::Middleware do
     Dry::Monitor::Rack::Logger.new(Dry::Monitor::Logger.new(log_file_path))
   end
 
-  describe '#call' do
-    let(:env) do
-      { 'REQUEST_METHOD' => 'GET',
-        'PATH_INFO' => '/hello-world',
-        'REMOTE_ADDR' => '0.0.0.0',
-        'QUERY_STRING' => query_params }
-    end
+  let(:env) do
+    { 'REQUEST_METHOD' => 'GET',
+      'PATH_INFO' => '/hello-world',
+      'REMOTE_ADDR' => '0.0.0.0',
+      'QUERY_STRING' => query_params }
+  end
 
-    let(:query_params) do
-      %w[
+  let(:query_params) do
+    %w[
         _csrf=123456
         password=secret
         user[password]=secret
@@ -37,8 +36,9 @@ RSpec.describe Dry::Monitor::Rack::Middleware do
         ids[]=1
         ids[]=2
       ].join('&')
-    end
+  end
 
+  describe '#call' do
     before do
       File.open(log_file_path, 'w').close
       rack_logger.attach(middleware)
@@ -65,12 +65,34 @@ RSpec.describe Dry::Monitor::Rack::Middleware do
       captured = []
 
       middleware.on(:error) do |event|
-        captured << event.payload
+        captured << event[:exception]
+        captured << event[:env]
       end
 
-      middleware.instrument(:error, exception: 'oops')
+      exception = 'oops'
+      env = { 'REQUEST_METHOD' => 'GET' }
 
-      expect(captured).to eql([exception: 'oops'])
+      middleware.instrument(:error, exception: exception, env: env)
+
+      expect(captured).to eql([exception, env])
+    end
+  end
+
+  describe 'rack logger' do
+    before do
+      File.open(log_file_path, 'w').close
+      rack_logger.attach(middleware)
+    end
+
+    it 'logs exceptions' do
+      exception = double(:exception, message: 'oops', backtrace: ['/some/path.rb'])
+
+      middleware.instrument(:error, exception: exception, env: env)
+
+      log_file_content = File.read(log_file_path)
+
+      expect(log_file_content).to include('oops')
+      expect(log_file_content).to include('/some/path.rb')
     end
   end
 end
