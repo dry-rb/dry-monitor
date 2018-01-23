@@ -3,9 +3,9 @@ require 'dry/events/publisher'
 module Dry
   module Monitor
     class Clock
-      def measure(&block)
+      def measure
         start = current
-        result = block.()
+        result = yield
         stop = current
         [result, ((stop - start) * 1000).round(2)]
       end
