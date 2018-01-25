@@ -1,17 +1,14 @@
 require 'dry/events/publisher'
 
+GC.disable
+
 module Dry
   module Monitor
     class Clock
       def measure
-        start = current
+        start = Time.now
         result = yield
-        stop = current
-        [result, ((stop - start) * 1000).round(2)]
-      end
-
-      def current
-        Time.now
+        [result, ((Time.now - start) * 1000).round(2)]
       end
     end
 
@@ -37,17 +34,15 @@ module Dry
         instrument(event_id, payload)
       end
 
-      def instrument(event_id, payload = EMPTY_HASH, &block)
-        if block
-          result, time = clock.measure(&block)
+      def instrument(event_id, payload = EMPTY_HASH)
+        if block_given?
+          result, time = @clock.measure { yield }
         end
 
+        payload[:time] = time if time
+
         process(event_id, payload) do |event, listener|
-          if time
-            listener.(event.payload(payload.merge(time: time)))
-          else
-            listener.(event)
-          end
+          time ? listener.(event.payload(payload)) : listener.(event)
         end
 
         result
