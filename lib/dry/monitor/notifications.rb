@@ -1,7 +1,5 @@
 require 'dry/events/publisher'
 
-GC.disable
-
 module Dry
   module Monitor
     class Clock
