@@ -37,10 +37,12 @@ module Dry
           result, time = @clock.measure { yield }
         end
 
-        payload[:time] = time if time
-
         process(event_id, payload) do |event, listener|
-          time ? listener.(event.payload(payload)) : listener.(event)
+          if time
+            listener.(event.payload(payload.merge(time: time)))
+          else
+            listener.(event)
+          end
         end
 
         result
