@@ -6,8 +6,7 @@ module Dry
       def measure
         start = current
         result = yield
-        stop = current
-        [result, stop - start]
+        [result, current - start]
       end
 
       def current
@@ -37,9 +36,9 @@ module Dry
         instrument(event_id, payload)
       end
 
-      def instrument(event_id, payload = EMPTY_HASH, &block)
-        if block
-          result, time = clock.measure(&block)
+      def instrument(event_id, payload = EMPTY_HASH)
+        if block_given?
+          result, time = @clock.measure { yield }
         end
 
         process(event_id, payload) do |event, listener|
