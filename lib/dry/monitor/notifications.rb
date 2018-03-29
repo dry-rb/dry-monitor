@@ -7,11 +7,11 @@ module Dry
         start = current
         result = yield
         stop = current
-        [result, ((stop - start) * 1000).round(2)]
+        [result, stop - start]
       end
 
       def current
-        Time.now
+        Process.clock_gettime(Process::CLOCK_MONOTONIC, :millisecond)
       end
     end
 
