@@ -4,9 +4,13 @@ module Dry
   module Monitor
     class Clock
       def measure
-        start = Time.now
+        start = current
         result = yield
-        [result, ((Time.now - start) * 1000).round(2)]
+        [result, current - start]
+      end
+
+      def current
+        Process.clock_gettime(Process::CLOCK_MONOTONIC, :millisecond)
       end
     end
 

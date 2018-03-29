@@ -1,5 +1,13 @@
 require 'dry-configurable'
-require 'rouge'
+require 'rouge/util'
+require 'rouge/token'
+require 'rouge/theme'
+require 'rouge/themes/gruvbox'
+require 'rouge/formatter'
+require 'rouge/formatters/terminal256'
+require 'rouge/lexer'
+require 'rouge/regex_lexer'
+require 'rouge/lexers/sql'
 require 'dry/monitor/notifications'
 
 module Dry
