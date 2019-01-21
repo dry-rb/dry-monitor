@@ -1,3 +1,9 @@
+# v0.2.0 2018-01-21
+
+### Changed
+
+* Make `rouge` an optional dependency (davydovanton & mensfeld)
+
 # v0.1.2 2018-01-04
 
 ### Fixed
