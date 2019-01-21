@@ -1,13 +1,5 @@
 require 'dry-configurable'
-require 'rouge/util'
-require 'rouge/token'
-require 'rouge/theme'
-require 'rouge/themes/gruvbox'
-require 'rouge/formatter'
-require 'rouge/formatters/terminal256'
-require 'rouge/lexer'
-require 'rouge/regex_lexer'
-require 'rouge/lexers/sql'
+require 'dry/core/extensions'
 require 'dry/monitor/notifications'
 
 module Dry
@@ -16,23 +8,37 @@ module Dry
 
     module SQL
       class Logger
+        extend Dry::Core::Extensions
         extend Dry::Configurable
 
-        setting :theme, Rouge::Themes::Gruvbox.new
-        setting :colorize, true
+        register_extension(:default_colorizer) do
+          require_relative './colorizers/default'
+
+          def colorizer
+            @colorizer ||= Colorizers::Default.new(config.theme)
+          end
+        end
+
+        register_extension(:rouge_colorizer) do
+          require_relative './colorizers/rouge'
+
+          def colorizer
+            @colorizer ||= Colorizers::Rouge.new(config.theme)
+          end
+        end
+
+        setting :theme, nil
         setting :message_template, %(  Loaded %s in %sms %s).freeze
 
         attr_reader :config
         attr_reader :logger
-        attr_reader :formatter
-        attr_reader :lexer
         attr_reader :template
+
+        load_extensions(:default_colorizer)
 
         def initialize(logger, config = self.class.config)
           @logger = logger
           @config = config
-          @formatter = Rouge::Formatters::Terminal256.new(config.theme)
-          @lexer = Rouge::Lexers::SQL.new
           @template = config.message_template
         end
 
@@ -43,13 +49,7 @@ module Dry
         end
 
         def log_query(time, name, query)
-          logger.info template % [name.inspect, time, colorize(query)]
-        end
-
-        private
-
-        def colorize(string)
-          config.colorize ? formatter.format(lexer.lex(string)) : string
+          logger.info template % [name.inspect, time, colorizer.call(query)]
         end
       end
     end
