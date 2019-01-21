@@ -33,16 +33,17 @@ RSpec.describe Dry::Monitor::SQL::Logger do
 
   context 'without colors' do
     let(:sql_logger) do
-      Class.new(Dry::Monitor::SQL::Logger) do
-        configure do |config|
-          config.colorize = false
-        end
-      end
+      Dry::Monitor::SQL::Logger.load_extensions(:rouge_colorizer)
+      Dry::Monitor::SQL::Logger
     end
 
     include_context '#subscribe' do
+      let(:colored_query) do
+        "\e[38;5;203mSELECT\e[39m\e[38;5;230m"
+      end
+
       it 'writes sql query in logs' do
-        expect(log_file_content).to include(query)
+        expect(log_file_content).to include(colored_query)
       end
     end
   end
