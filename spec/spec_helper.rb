@@ -10,6 +10,7 @@ begin
 rescue LoadError; end
 
 require 'dry-monitor'
+Dry::Monitor.load_extensions(:sql, :rack)
 
 SPEC_ROOT = Pathname(__dir__)
 
