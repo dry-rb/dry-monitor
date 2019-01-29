@@ -1,4 +1,5 @@
 require 'dry/configurable'
+require 'dry/monitor/rack/middleware'
 
 module Dry
   module Monitor

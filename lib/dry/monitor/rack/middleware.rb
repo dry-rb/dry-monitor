@@ -1,4 +1,3 @@
-require 'rack/utils'
 require 'dry/monitor/notifications'
 
 module Dry
