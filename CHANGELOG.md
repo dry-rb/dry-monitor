@@ -1,3 +1,14 @@
+# v0.3.0 2018-01-29
+
+### Fixed
+
+* cannot load such file -- rack/utils (mensfeld)
+
+### Changed
+
+* Make `rack` logger into a plugin (mensfeld)
+* Make `sql` logger into a plugin (mensfeld)
+
 # v0.2.0 2018-01-21
 
 ### Changed
