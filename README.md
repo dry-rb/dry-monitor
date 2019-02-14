@@ -1,6 +1,5 @@
 [gem]: https://rubygems.org/gems/dry-monitor
 [travis]: https://travis-ci.org/dry-rb/dry-monitor
-[gemnasium]: https://gemnasium.com/dry-rb/dry-monitor
 [codeclimate]: https://codeclimate.com/github/dry-rb/dry-monitor
 [coveralls]: https://coveralls.io/r/dry-rb/dry-monitor
 [inchpages]: http://inch-ci.org/github/dry-rb/dry-monitor
@@ -9,7 +8,6 @@
 
 [![Gem Version](https://badge.fury.io/rb/dry-monitor.svg)][gem]
 [![Build Status](https://travis-ci.org/dry-rb/dry-monitor.svg?branch=master)][travis]
-[![Dependency Status](https://gemnasium.com/dry-rb/dry-monitor.svg)][gemnasium]
 [![Code Climate](https://codeclimate.com/github/dry-rb/dry-monitor/badges/gpa.svg)][codeclimate]
 [![Test Coverage](https://codeclimate.com/github/dry-rb/dry-monitor/badges/coverage.svg)][codeclimate]
 [![Inline docs](http://inch-ci.org/github/dry-rb/dry-monitor.svg?branch=master)][inchpages]
