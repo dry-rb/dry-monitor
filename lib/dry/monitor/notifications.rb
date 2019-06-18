@@ -1,4 +1,5 @@
 require 'dry/events/publisher'
+require 'dry/core/constants'
 
 module Dry
   module Monitor
@@ -18,12 +19,11 @@ module Dry
 
     class Notifications
       include Events::Publisher['Dry::Monitor::Notifications']
+      include Dry::Core::Constants
 
       attr_reader :id
 
       attr_reader :clock
-
-      EMPTY_HASH = {}.freeze
 
       def initialize(id)
         @id = id
