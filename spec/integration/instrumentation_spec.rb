@@ -33,5 +33,17 @@ RSpec.describe 'Subscribing to instrumentation events' do
 
       expect(captured).to eql([[:sql, 'SELECT 1 FROM users']])
     end
+
+    it 'allows instrumenting via block when no payload given' do
+      captured = []
+
+      notifications.subscribe(:sql) do |event|
+        captured << [event.id]
+      end
+
+      notifications.instrument(:sql) {}
+
+      expect(captured).to eql([[:sql]])
+    end
   end
 end
