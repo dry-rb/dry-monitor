@@ -23,6 +23,8 @@ module Dry
 
       attr_reader :clock
 
+      EMPTY_HASH = {}.freeze
+
       def initialize(id)
         @id = id
         @clock = CLOCK
