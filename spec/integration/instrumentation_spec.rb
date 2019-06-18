@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 RSpec.describe 'Subscribing to instrumentation events' do
   subject(:notifications) { Dry::Monitor::Notifications.new(:app) }
 
   before do
-    Dry::Monitor::Notifications.register_event(:sql, { name: 'rom[sql]' })
+    Dry::Monitor::Notifications.register_event(:sql, name: 'rom[sql]')
   end
 
   describe '#instrument' do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'dry/configurable'
 require 'dry/monitor/rack/middleware'
 
@@ -9,15 +11,15 @@ module Dry
 
         setting :filtered_params, %w[_csrf password]
 
-        REQUEST_METHOD = 'REQUEST_METHOD'.freeze
-        PATH_INFO = 'PATH_INFO'.freeze
-        REMOTE_ADDR = 'REMOTE_ADDR'.freeze
-        QUERY_STRING = 'QUERY_STRING'.freeze
+        REQUEST_METHOD = 'REQUEST_METHOD'
+        PATH_INFO = 'PATH_INFO'
+        REMOTE_ADDR = 'REMOTE_ADDR'
+        QUERY_STRING = 'QUERY_STRING'
 
-        START_MSG = %(Started %s "%s" for %s at %s).freeze
-        STOP_MSG = %(Finished %s "%s" for %s in %sms [Status: %s]\n).freeze
-        QUERY_MSG = %(  Query parameters %s).freeze
-        FILTERED = '[FILTERED]'.freeze
+        START_MSG = %(Started %s "%s" for %s at %s)
+        STOP_MSG = %(Finished %s "%s" for %s in %sms [Status: %s]\n)
+        QUERY_MSG = %(  Query parameters %s)
+        FILTERED = '[FILTERED]'
 
         attr_reader :logger
 
@@ -42,29 +44,29 @@ module Dry
           end
         end
 
-        def log_exception(e)
-          logger.error e.message
-          logger.error filter_backtrace(e.backtrace).join("\n")
+        def log_exception(err)
+          logger.error err.message
+          logger.error filter_backtrace(err.backtrace).join("\n")
         end
 
         def log_start_request(request)
           info START_MSG % [
-                 request[REQUEST_METHOD],
-                 request[PATH_INFO],
-                 request[REMOTE_ADDR],
-                 Time.now
-               ]
+            request[REQUEST_METHOD],
+            request[PATH_INFO],
+            request[REMOTE_ADDR],
+            Time.now
+          ]
           log_request_params(request)
         end
 
         def log_stop_request(request, status, time)
           info STOP_MSG % [
-                 request[REQUEST_METHOD],
-                 request[PATH_INFO],
-                 request[REMOTE_ADDR],
-                 time,
-                 status
-               ]
+            request[REQUEST_METHOD],
+            request[PATH_INFO],
+            request[REMOTE_ADDR],
+            time,
+            status
+          ]
         end
 
         def log_request_params(request)
@@ -80,9 +82,7 @@ module Dry
         def with_http_params(params)
           params = ::Rack::Utils.parse_nested_query(params)
 
-          if params.size > 0
-            yield(filter_params(params))
-          end
+          yield(filter_params(params)) unless params.empty?
         end
 
         def filter_backtrace(backtrace)

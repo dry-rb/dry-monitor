@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rouge/util'
 require 'rouge/token'
 require 'rouge/theme'

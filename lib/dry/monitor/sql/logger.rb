@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'dry-configurable'
 require 'dry/core/extensions'
 require 'dry/monitor/notifications'
@@ -28,7 +30,7 @@ module Dry
         end
 
         setting :theme, nil
-        setting :message_template, %(  Loaded %s in %sms %s).freeze
+        setting :message_template, %(  Loaded %s in %sms %s)
 
         attr_reader :config
         attr_reader :logger

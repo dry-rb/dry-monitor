@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'dry/monitor/notifications'
 
 module Dry
