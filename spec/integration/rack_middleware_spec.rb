@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Dry::Monitor::Rack::Middleware do
   subject(:middleware) { Dry::Monitor::Rack::Middleware.new(notifications).new(rack_app) }
 
@@ -26,16 +28,16 @@ RSpec.describe Dry::Monitor::Rack::Middleware do
 
   let(:query_params) do
     %w[
-        _csrf=123456
-        password=secret
-        user[password]=secret
-        others[][password]=secret1
-        others[][password]=secret2
-        foo=bar
-        one=1
-        ids[]=1
-        ids[]=2
-      ].join('&')
+      _csrf=123456
+      password=secret
+      user[password]=secret
+      others[][password]=secret1
+      others[][password]=secret2
+      foo=bar
+      one=1
+      ids[]=1
+      ids[]=2
+    ].join('&')
   end
 
   describe '#call' do

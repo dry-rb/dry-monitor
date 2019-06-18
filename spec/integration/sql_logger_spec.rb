@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Dry::Monitor::SQL::Logger do
   subject(:logger) { sql_logger.new(Dry::Monitor::Logger.new(log_file_path)) }
 

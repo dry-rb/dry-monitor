@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'logger'
 
 module Dry
@@ -5,7 +7,7 @@ module Dry
     class Logger < ::Logger
       def initialize(*args)
         super
-        self.formatter = proc do |severity, datetime, progname, msg|
+        self.formatter = proc do |_severity, _datetime, _progname, msg|
           "#{msg}\n"
         end
       end
