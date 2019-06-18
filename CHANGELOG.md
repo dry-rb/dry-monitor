@@ -1,8 +1,8 @@
-# Unreleased
+# v0.3.1 2019-06-18
 
 ### Fixed
 
-* uninitialized constant Dry::Monitor::Notifications::EMPTY_HASH when no payload given (mensfeld)
+* Uninitialized constant `Dry::Monitor::Notifications::EMPTY_HASH` when no payload given (@mensfeld)
 
 # v0.3.0 2019-01-29
 
