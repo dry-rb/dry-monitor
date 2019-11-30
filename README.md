@@ -1,23 +1,18 @@
 [gem]: https://rubygems.org/gems/dry-monitor
-[travis]: https://travis-ci.org/dry-rb/dry-monitor
-[codeclimate]: https://codeclimate.com/github/dry-rb/dry-monitor
-[coveralls]: https://coveralls.io/r/dry-rb/dry-monitor
-[inchpages]: http://inch-ci.org/github/dry-rb/dry-monitor
+[ci]: https://github.com/dry-rb/dry-monitor/actions?query=workflow%3Aci
+[code_climate]: https://codeclimate.com/github/dry-rb/dry-monitor
+[inch]: http://inch-ci.org/github/dry-rb/dry-monitor
+[chat]: https://dry-rb.zulipchat.com
 
-# dry-monitor [![Join the chat at https://gitter.im/dry-rb/chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/dry-rb/chat)
+# dry-monitor [![Join the chat at https://dry-rb.zulipchat.com](https://img.shields.io/badge/dry--rb-join%20chat-%23346b7a.svg)][chat]
 
 [![Gem Version](https://badge.fury.io/rb/dry-monitor.svg)][gem]
-[![Build Status](https://travis-ci.org/dry-rb/dry-monitor.svg?branch=master)][travis]
-[![Code Climate](https://codeclimate.com/github/dry-rb/dry-monitor/badges/gpa.svg)][codeclimate]
-[![Test Coverage](https://codeclimate.com/github/dry-rb/dry-monitor/badges/coverage.svg)][codeclimate]
-[![Inline docs](http://inch-ci.org/github/dry-rb/dry-monitor.svg?branch=master)][inchpages]
+[![Build Status](https://github.com/dry-rb/dry-monitor/workflows/ci/badge.svg)][ci]
+[![Code Climate](https://api.codeclimate.com/v1/badges/cd6e51fc345f42768068/maintainability)][code_climate]
+[![Test Coverage](https://api.codeclimate.com/v1/badges/cd6e51fc345f42768068/test_coverage)][code_climate]
+[![API Documentation Coverage](http://inch-ci.org/github/dry-rb/dry-monitor.svg)][inch]
 
 Monitoring and instrumentation APIs.
-
-## Synopsis
-
-``` ruby
-```
 
 ## License
 
