@@ -47,5 +47,21 @@ RSpec.describe "Subscribing to instrumentation events" do
 
       expect(captured).to eql([[:sql]])
     end
+
+    it 'yields the payload to the instrumented block' do
+      captured = []
+
+      notifications.subscribe(:sql) do |event|
+        captured << event
+      end
+
+      notifications.instrument(:sql, outside_block: true) do |payload|
+        payload[:inside_block] = true
+      end
+
+      expect(captured[0].payload).to match hash_including(
+        outside_block: true, inside_block: true
+      )
+    end
   end
 end

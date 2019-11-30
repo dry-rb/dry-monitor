@@ -40,7 +40,7 @@ module Dry
       end
 
       def instrument(event_id, payload = EMPTY_HASH)
-        result, time = @clock.measure { yield } if block_given?
+        result, time = @clock.measure { yield payload } if block_given?
 
         process(event_id, payload) do |event, listener|
           if time
