@@ -1,3 +1,5 @@
+# this file is managed by dry-rb/devtools project
+
 AllCops:
   TargetRubyVersion: 2.4
 
@@ -43,9 +45,7 @@ Metrics/AbcSize:
   Max: 20
 
 Metrics/BlockLength:
-  Enabled: true
-  Exclude:
-    - 'spec/**/*_spec.rb'
+  Enabled: false
 
 Metrics/CyclomaticComplexity:
   Enabled: true
@@ -65,12 +65,25 @@ Layout/IndentFirstArrayElement:
 
 Style/ClassAndModuleChildren:
   Exclude:
-    - 'spec/**/*_spec.rb'
+    - "spec/**/*_spec.rb"
 
 Lint/HandleExceptions:
   Exclude:
-    - 'spec/spec_helper.rb'
+    - "spec/spec_helper.rb"
 
 Naming/FileName:
   Exclude:
-    - 'lib/dry-*.rb'
+    - "lib/dry-*.rb"
+
+Style/SymbolArray:
+  Exclude:
+    - "spec/**/*_spec.rb"
+
+Style/ConditionalAssignment:
+  Enabled: false
+
+Naming/MethodName:
+  Enabled: false
+
+Style/AsciiComments:
+  Enabled: false
