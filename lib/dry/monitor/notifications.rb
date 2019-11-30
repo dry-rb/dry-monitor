@@ -41,7 +41,12 @@ module Dry
 
       def instrument(event_id, payload = EMPTY_HASH)
         result, time = @clock.measure { yield payload } if block_given?
-
+      # We should always try to instrument, even the system-level exceptions
+      rescue Exception => e # rubocop:disable Lint/RescueException
+        payload = {} if payload.equal?(EMPTY_HASH)
+        payload[:exception] = e
+        raise
+      ensure
         process(event_id, payload) do |event, listener|
           if time
             listener.(event.payload(payload.merge(time: time)))
