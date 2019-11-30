@@ -4,7 +4,9 @@ source 'https://rubygems.org'
 
 gemspec
 
-gem 'dry-events', git: 'https://github.com/dry-rb/dry-events.git', branch: 'master'
+git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
+
+gem 'dry-events', github: 'dry-rb/dry-events', branch: 'master'
 
 group :test do
   gem 'rack'
@@ -13,4 +15,5 @@ end
 
 group :tools do
   gem 'byebug', platform: :mri
+  gem 'ossy', github: 'solnic/ossy', branch: 'master'
 end
