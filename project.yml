@@ -1,2 +1,16 @@
 name: dry-monitor
 codacy_id: 984c4274e56d423a818e7a1bf5e963d0
+gemspec:
+  authors: ["Piotr Solnica"]
+  email: ["piotr.solnica@gmail.com"]
+  summary: "Monitoring and instrumentation APIs"
+  development_dependencies:
+    - bundler
+    - rake
+    - rspec
+    - [rouge, "~> 2.0", ">= 2.2.1"]
+  runtime_dependencies:
+    - [dry-core, "~> 0.4"]
+    - [dry-configurable, "~> 0.5"]
+    - [dry-equalizer, "~> 0.2"]
+    - [dry-events, "~> 0.5"]
