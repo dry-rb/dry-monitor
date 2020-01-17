@@ -1,0 +1,52 @@
+---
+- version: 0.3.1
+  date: '2019-06-18'
+  fixed:
+  - Uninitialized constant `Dry::Monitor::Notifications::EMPTY_HASH` when no payload
+    given (@mensfeld)
+- version: 0.3.0
+  date: '2019-01-29'
+  fixed:
+  - cannot load such file -- rack/utils (mensfeld)
+  changed:
+  - Make `rack` logger into a plugin (mensfeld)
+  - Make `sql` logger into a plugin (mensfeld)
+- version: 0.2.0
+  date: '2018-01-21'
+  changed:
+  - Make `rouge` an optional dependency (davydovanton & mensfeld)
+- version: 0.1.2
+  date: '2018-01-04'
+  fixed:
+  - Rack logger no longer prevents arbitrary payload in `:error` events (solnic)
+- version: 0.1.1
+  date: '2018-01-03'
+  fixed:
+  - Query params containing arrays of primitives (e.g. `?ids[]=1&ids[]=2`) no longer
+    crash the logger (timriley)
+- version: 0.1.0
+  date: '2018-01-02'
+  fixed:
+  - Query params are logged correctly via rack middleware (solnic)
+  changed:
+  - Uses `dry-events` for notifications (solnic)
+- version: 0.0.3
+  date: '2017-08-28'
+  changed:
+  - Update default theme setting for compatibility with latest version of rouge (alexandru-calinoiu)
+  - Require latest version of rouge gem (timriley)
+- version: 0.0.2
+  date: '2017-02-02'
+  added:
+  - "`Dry::Monitor::Rack::Middleware#on` shortcut (solnic)"
+  - "`Dry::Monitor::Rack::Middleware#instrument` shortcut (solnic)"
+  - "`Dry::Monitor::SQL::Logger` can be configured with a custom message template
+    (solnic)"
+  changed:
+  - "`Dry::Monitor::Rack::Logger#{subscribe=>attach}` and now it accepts a rack middleware
+    instance (solnic)"
+  - "`Dry::Monitor::Rack::Logger` appends new lines when logging `:rack.request.stop`
+    events (solnic)"
+- version: 0.0.1
+  date: '2017-02-01'
+  summary: First public release
