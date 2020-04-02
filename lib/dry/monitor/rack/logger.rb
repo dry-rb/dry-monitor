@@ -18,7 +18,7 @@ module Dry
 
         START_MSG = %(Started %s "%s" for %s at %s)
         STOP_MSG = %(Finished %s "%s" for %s in %sms [Status: %s]\n)
-        QUERY_MSG = %(  Query parameters %s)
+        QUERY_MSG = %(  Query parameters )
         FILTERED = '[FILTERED]'
 
         attr_reader :logger
@@ -50,7 +50,7 @@ module Dry
         end
 
         def log_start_request(request)
-          info START_MSG % [
+          logger.info START_MSG % [
             request[REQUEST_METHOD],
             request[PATH_INFO],
             request[REMOTE_ADDR],
@@ -60,7 +60,7 @@ module Dry
         end
 
         def log_stop_request(request, status, time)
-          info STOP_MSG % [
+          logger.info STOP_MSG % [
             request[REQUEST_METHOD],
             request[PATH_INFO],
             request[REMOTE_ADDR],
@@ -71,7 +71,7 @@ module Dry
 
         def log_request_params(request)
           with_http_params(request[QUERY_STRING]) do |params|
-            info QUERY_MSG % [params.inspect]
+            logger.info QUERY_MSG + params.inspect
           end
         end
 
@@ -91,17 +91,17 @@ module Dry
         end
 
         def filter_params(params)
-          params.each_with_object({}) do |(k, v), h|
+          params.each do |k, v|
             if config.filtered_params.include?(k)
-              h.update(k => FILTERED)
+              params[k] = FILTERED
             elsif v.is_a?(Hash)
-              h.update(k => filter_params(v))
+              filter_params(v)
             elsif v.is_a?(Array)
-              h.update(k => v.map { |m| m.is_a?(Hash) ? filter_params(m) : m })
-            else
-              h[k] = v
+              v.map! { |m| m.is_a?(Hash) ? filter_params(m) : m }
             end
           end
+
+          params
         end
       end
     end
