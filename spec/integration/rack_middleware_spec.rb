@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'rack/builder'
+
 RSpec.describe Dry::Monitor::Rack::Middleware do
   subject(:middleware) { Dry::Monitor::Rack::Middleware.new(notifications).new(rack_app) }
 
@@ -38,6 +40,28 @@ RSpec.describe Dry::Monitor::Rack::Middleware do
       ids[]=1
       ids[]=2
     ].join('&')
+  end
+
+  describe '#new' do
+    let(:builder) do
+      middleware = described_class.new(notifications)
+      inner = rack_app
+
+      Rack::Builder.new do
+        use middleware, :an_argument do
+          "with a block"
+        end
+
+        run inner
+      end
+    end
+
+    it 'is compatible with Rack::Builder' do
+      expect(rack_app).to receive(:call).with(env).and_return([200, :total_success])
+
+      app = builder.to_app
+      app.call(env)
+    end
   end
 
   describe '#call' do
