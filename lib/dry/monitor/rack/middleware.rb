@@ -22,7 +22,7 @@ module Dry
           @notifications, @app = *args
         end
 
-        def new(app)
+        def new(app, *_args, &_block)
           self.class.new(notifications, app)
         end
 
