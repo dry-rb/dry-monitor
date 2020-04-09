@@ -16,17 +16,25 @@ module Dry
         register_extension(:default_colorizer) do
           require_relative "./colorizers/default"
 
-          def colorizer
-            @colorizer ||= Colorizers::Default.new(config.theme)
+          module DefaultColorizer
+            def colorizer
+              @colorizer ||= Colorizers::Default.new(config.theme)
+            end
           end
+
+          Logger.include(DefaultColorizer)
         end
 
         register_extension(:rouge_colorizer) do
           require_relative "./colorizers/rouge"
 
-          def colorizer
-            @colorizer ||= Colorizers::Rouge.new(config.theme)
+          module RougeColorizer
+            def colorizer
+              @colorizer ||= Colorizers::Rouge.new(config.theme)
+            end
           end
+
+          Logger.include(RougeColorizer)
         end
 
         setting :theme, nil
