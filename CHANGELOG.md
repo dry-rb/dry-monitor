@@ -1,3 +1,17 @@
+## 0.3.2 2020-04-09
+
+
+### Fixed
+
+- Ensure `Dry::Monitor::Rack::Middleware` is compatible with `Rack::Builder#use` (@jodosha)
+
+### Changed
+
+- Performance improvements (@davydovanton)
+- Dependency on `dry-events` was bumped to `~> 0.5` (@davydovanton)
+
+[Compare v0.3.1...v0.3.2](https://github.com/dry-rb/dry-monitor/compare/v0.3.1...v0.3.2)
+
 ## 0.3.1 2019-06-18
 
 
