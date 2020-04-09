@@ -5,7 +5,6 @@
     - "Ensure `Dry::Monitor::Rack::Middleware` is compatible with `Rack::Builder#use` (@jodosha)"
   changed:
     - "Performance improvements (@davydovanton)"
-    - "Dependency on `dry-events` was bumped to `~> 0.5` (@davydovanton)"
 - version: 0.3.1
   date: '2019-06-18'
   fixed:
