@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'dry/events/publisher'
-require 'dry/monitor/constants'
+require "dry/events/publisher"
+require "dry/monitor/constants"
 
 module Dry
   module Monitor
@@ -20,7 +20,7 @@ module Dry
     CLOCK = Clock.new
 
     class Notifications
-      include Events::Publisher['Dry::Monitor::Notifications']
+      include Events::Publisher["Dry::Monitor::Notifications"]
 
       attr_reader :id
 

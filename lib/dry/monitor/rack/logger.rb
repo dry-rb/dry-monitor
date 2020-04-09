@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'dry/configurable'
-require 'dry/monitor/rack/middleware'
+require "dry/configurable"
+require "dry/monitor/rack/middleware"
 
 module Dry
   module Monitor
@@ -11,15 +11,15 @@ module Dry
 
         setting :filtered_params, %w[_csrf password]
 
-        REQUEST_METHOD = 'REQUEST_METHOD'
-        PATH_INFO = 'PATH_INFO'
-        REMOTE_ADDR = 'REMOTE_ADDR'
-        QUERY_STRING = 'QUERY_STRING'
+        REQUEST_METHOD = "REQUEST_METHOD"
+        PATH_INFO = "PATH_INFO"
+        REMOTE_ADDR = "REMOTE_ADDR"
+        QUERY_STRING = "QUERY_STRING"
 
         START_MSG = %(Started %s "%s" for %s at %s)
         STOP_MSG = %(Finished %s "%s" for %s in %sms [Status: %s]\n)
         QUERY_MSG = %(  Query parameters )
-        FILTERED = '[FILTERED]'
+        FILTERED = "[FILTERED]"
 
         attr_reader :logger
 
@@ -87,7 +87,7 @@ module Dry
 
         def filter_backtrace(backtrace)
           # TODO: what do we want to do with this?
-          backtrace.reject { |l| l.include?('gems') }
+          backtrace.reject { |l| l.include?("gems") }
         end
 
         def filter_params(params)

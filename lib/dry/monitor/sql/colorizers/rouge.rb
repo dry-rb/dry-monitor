@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-require 'rouge/util'
-require 'rouge/token'
-require 'rouge/theme'
-require 'rouge/themes/gruvbox'
-require 'rouge/formatter'
-require 'rouge/formatters/terminal256'
-require 'rouge/lexer'
-require 'rouge/regex_lexer'
-require 'rouge/lexers/sql'
+require "rouge/util"
+require "rouge/token"
+require "rouge/theme"
+require "rouge/themes/gruvbox"
+require "rouge/formatter"
+require "rouge/formatters/terminal256"
+require "rouge/lexer"
+require "rouge/regex_lexer"
+require "rouge/lexers/sql"
 
 module Dry
   module Monitor

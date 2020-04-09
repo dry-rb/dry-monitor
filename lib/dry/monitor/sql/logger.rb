@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'dry-configurable'
-require 'dry/core/extensions'
-require 'dry/monitor/notifications'
+require "dry-configurable"
+require "dry/core/extensions"
+require "dry/monitor/notifications"
 
 module Dry
   module Monitor
@@ -14,7 +14,7 @@ module Dry
         extend Dry::Configurable
 
         register_extension(:default_colorizer) do
-          require_relative './colorizers/default'
+          require_relative "./colorizers/default"
 
           def colorizer
             @colorizer ||= Colorizers::Default.new(config.theme)
@@ -22,7 +22,7 @@ module Dry
         end
 
         register_extension(:rouge_colorizer) do
-          require_relative './colorizers/rouge'
+          require_relative "./colorizers/rouge"
 
           def colorizer
             @colorizer ||= Colorizers::Rouge.new(config.theme)

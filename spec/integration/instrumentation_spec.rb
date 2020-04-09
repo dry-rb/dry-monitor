@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-RSpec.describe 'Subscribing to instrumentation events' do
+RSpec.describe "Subscribing to instrumentation events" do
   subject(:notifications) { Dry::Monitor::Notifications.new(:app) }
 
   before do
-    Dry::Monitor::Notifications.register_event(:sql, name: 'rom[sql]')
+    Dry::Monitor::Notifications.register_event(:sql, name: "rom[sql]")
   end
 
-  describe '#instrument' do
-    it 'allows subscribing via block' do
+  describe "#instrument" do
+    it "allows subscribing via block" do
       captured = []
-      payload = { query: 'SELECT 1 FROM users' }
+      payload = {query: "SELECT 1 FROM users"}
 
       notifications.subscribe(:sql) do |event|
         captured << [event.id, event[:query]]
@@ -18,12 +18,12 @@ RSpec.describe 'Subscribing to instrumentation events' do
 
       notifications.instrument(:sql, payload)
 
-      expect(captured).to eql([[:sql, 'SELECT 1 FROM users']])
+      expect(captured).to eql([[:sql, "SELECT 1 FROM users"]])
     end
 
-    it 'allows instrumenting via block' do
+    it "allows instrumenting via block" do
       captured = []
-      payload = { query: 'SELECT 1 FROM users' }
+      payload = {query: "SELECT 1 FROM users"}
 
       notifications.subscribe(:sql) do |event|
         captured << [event.id, event[:query]]
@@ -33,10 +33,10 @@ RSpec.describe 'Subscribing to instrumentation events' do
         payload
       end
 
-      expect(captured).to eql([[:sql, 'SELECT 1 FROM users']])
+      expect(captured).to eql([[:sql, "SELECT 1 FROM users"]])
     end
 
-    it 'allows instrumenting via block when no payload given' do
+    it "allows instrumenting via block when no payload given" do
       captured = []
 
       notifications.subscribe(:sql) do |event|

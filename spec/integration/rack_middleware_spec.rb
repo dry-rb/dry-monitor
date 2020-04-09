@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'rack/builder'
+require "rack/builder"
 
 RSpec.describe Dry::Monitor::Rack::Middleware do
   subject(:middleware) { Dry::Monitor::Rack::Middleware.new(notifications).new(rack_app) }
@@ -14,7 +14,7 @@ RSpec.describe Dry::Monitor::Rack::Middleware do
   end
 
   let(:log_file_path) do
-    SPEC_ROOT.join('test_logs/middleware.log')
+    SPEC_ROOT.join("test_logs/middleware.log")
   end
 
   let(:rack_logger) do
@@ -22,10 +22,10 @@ RSpec.describe Dry::Monitor::Rack::Middleware do
   end
 
   let(:env) do
-    { 'REQUEST_METHOD' => 'GET',
-      'PATH_INFO' => '/hello-world',
-      'REMOTE_ADDR' => '0.0.0.0',
-      'QUERY_STRING' => query_params }
+    {"REQUEST_METHOD" => "GET",
+     "PATH_INFO" => "/hello-world",
+     "REMOTE_ADDR" => "0.0.0.0",
+     "QUERY_STRING" => query_params}
   end
 
   let(:query_params) do
@@ -39,10 +39,10 @@ RSpec.describe Dry::Monitor::Rack::Middleware do
       one=1
       ids[]=1
       ids[]=2
-    ].join('&')
+    ].join("&")
   end
 
-  describe '#new' do
+  describe "#new" do
     let(:builder) do
       middleware = described_class.new(notifications)
       inner = rack_app
@@ -56,7 +56,7 @@ RSpec.describe Dry::Monitor::Rack::Middleware do
       end
     end
 
-    it 'is compatible with Rack::Builder' do
+    it "is compatible with Rack::Builder" do
       expect(rack_app).to receive(:call).with(env).and_return([200, :total_success])
 
       app = builder.to_app
@@ -64,13 +64,13 @@ RSpec.describe Dry::Monitor::Rack::Middleware do
     end
   end
 
-  describe '#call' do
+  describe "#call" do
     before do
-      File.open(log_file_path, 'w').close
+      File.open(log_file_path, "w").close
       rack_logger.attach(middleware)
     end
 
-    it 'triggers start/stop events for with a rack request' do
+    it "triggers start/stop events for with a rack request" do
       expect(rack_app).to receive(:call).with(env).and_return([200, :total_success])
 
       status, response = middleware.call(env)
@@ -86,8 +86,8 @@ RSpec.describe Dry::Monitor::Rack::Middleware do
     end
   end
 
-  describe '#on' do
-    it 'subscribe a listener to a specific request event' do
+  describe "#on" do
+    it "subscribe a listener to a specific request event" do
       captured = []
 
       middleware.on(:error) do |event|
@@ -95,8 +95,8 @@ RSpec.describe Dry::Monitor::Rack::Middleware do
         captured << event[:env]
       end
 
-      exception = 'oops'
-      env = { 'REQUEST_METHOD' => 'GET' }
+      exception = "oops"
+      env = {"REQUEST_METHOD" => "GET"}
 
       middleware.instrument(:error, exception: exception, env: env)
 
@@ -104,21 +104,21 @@ RSpec.describe Dry::Monitor::Rack::Middleware do
     end
   end
 
-  describe 'rack logger' do
+  describe "rack logger" do
     before do
-      File.open(log_file_path, 'w').close
+      File.open(log_file_path, "w").close
       rack_logger.attach(middleware)
     end
 
-    it 'logs exceptions' do
-      exception = double(:exception, message: 'oops', backtrace: ['/some/path.rb'])
+    it "logs exceptions" do
+      exception = double(:exception, message: "oops", backtrace: ["/some/path.rb"])
 
       middleware.instrument(:error, exception: exception, env: env)
 
       log_file_content = File.read(log_file_path)
 
-      expect(log_file_content).to include('oops')
-      expect(log_file_content).to include('/some/path.rb')
+      expect(log_file_content).to include("oops")
+      expect(log_file_content).to include("/some/path.rb")
     end
   end
 end
