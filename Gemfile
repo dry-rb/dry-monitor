@@ -1,17 +1,17 @@
 # frozen_string_literal: true
 
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
-eval_gemfile 'Gemfile.devtools'
+eval_gemfile "Gemfile.devtools"
 
 gemspec
 
-gem 'dry-events', github: 'dry-rb/dry-events', branch: 'master'
+gem "dry-events", github: "dry-rb/dry-events", branch: "master"
 
 group :test do
-  gem 'rack'
+  gem "rack"
 end
 
 group :tools do
-  gem 'byebug', platform: :mri
+  gem "byebug", platform: :mri
 end
