@@ -21,9 +21,7 @@ module Dry
         QUERY_MSG = %(  Query parameters )
         FILTERED = "[FILTERED]"
 
-        attr_reader :logger
-
-        attr_reader :config
+        attr_reader :logger, :config
 
         def initialize(logger, config = self.class.config)
           @logger = logger
@@ -31,12 +29,13 @@ module Dry
         end
 
         def attach(rack_monitor)
-          rack_monitor.on(:start) do |env:|
-            log_start_request(env)
+          rack_monitor.on(:start) do |event|
+            log_start_request(event.payload[:env])
           end
 
-          rack_monitor.on(:stop) do |env:, status:, time:|
-            log_stop_request(env, status, time)
+          rack_monitor.on(:stop) do |event|
+            request, status, time = event.payload.values_at(:env, :status, :time)
+            log_stop_request(request, status, time)
           end
 
           rack_monitor.on(:error) do |event|

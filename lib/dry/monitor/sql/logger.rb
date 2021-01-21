@@ -40,9 +40,7 @@ module Dry
         setting :theme, nil
         setting :message_template, %(  Loaded %s in %sms %s)
 
-        attr_reader :config
-        attr_reader :logger
-        attr_reader :template
+        attr_reader :config, :logger, :template
 
         load_extensions(:default_colorizer)
 
@@ -53,12 +51,12 @@ module Dry
         end
 
         def subscribe(notifications)
-          notifications.subscribe(:sql) do |time:, name:, query:|
-            log_query(time, name, query)
+          notifications.subscribe(:sql) do |event|
+            log_query(**event.payload)
           end
         end
 
-        def log_query(time, name, query)
+        def log_query(time:, name:, query:)
           logger.info template % [name.inspect, time, colorizer.call(query)]
         end
       end
