@@ -46,7 +46,7 @@ module Dry
           if time
             listener.(event.payload(payload.merge(time: time)))
           else
-            listener.(event)
+            listener.(**event)
           end
         end
 
