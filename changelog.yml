@@ -1,11 +1,11 @@
 ---
-- version: unreleased
-  summary: 
-  date: 
+- version: 0.4.0
+  summary:
+  date:
   fixed:
   - Compatibility with MRI 3.0 (@alex-damian-negru)
-  added: 
-  changed: 
+  added:
+  changed:
 - version: 0.3.2
   date: '2020-04-09'
   fixed:
