@@ -53,12 +53,10 @@ module Dry
         end
 
         def subscribe(notifications)
-          notifications.subscribe(:sql) do |time:, name:, query:|
-            log_query(time, name, query)
-          end
+          notifications.subscribe(:sql) { |params| log_query(**params) }
         end
 
-        def log_query(time, name, query)
+        def log_query(time:, name:, query:)
           logger.info template % [name.inspect, time, colorizer.call(query)]
         end
       end

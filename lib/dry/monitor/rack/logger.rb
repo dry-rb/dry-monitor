@@ -31,17 +31,9 @@ module Dry
         end
 
         def attach(rack_monitor)
-          rack_monitor.on(:start) do |env:|
-            log_start_request(env)
-          end
-
-          rack_monitor.on(:stop) do |env:, status:, time:|
-            log_stop_request(env, status, time)
-          end
-
-          rack_monitor.on(:error) do |event|
-            log_exception(event[:exception])
-          end
+          rack_monitor.on(:start) { |params| log_start_request(params[:env]) }
+          rack_monitor.on(:stop) { |params| log_stop_request(**params) }
+          rack_monitor.on(:error) { |event| log_exception(event[:exception]) }
         end
 
         def log_exception(err)
@@ -59,11 +51,11 @@ module Dry
           log_request_params(request)
         end
 
-        def log_stop_request(request, status, time)
+        def log_stop_request(env:, status:, time:)
           logger.info STOP_MSG % [
-            request[REQUEST_METHOD],
-            request[PATH_INFO],
-            request[REMOTE_ADDR],
+            env[REQUEST_METHOD],
+            env[PATH_INFO],
+            env[REMOTE_ADDR],
             time,
             status
           ]
