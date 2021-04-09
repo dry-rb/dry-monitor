@@ -1,10 +1,18 @@
 ---
+- version: unreleased
+  summary: 
+  date: 
+  fixed:
+  - Compatibility with MRI 3.0 (@alex-damian-negru)
+  added: 
+  changed: 
 - version: 0.3.2
   date: '2020-04-09'
   fixed:
-    - "Ensure `Dry::Monitor::Rack::Middleware` is compatible with `Rack::Builder#use` (@jodosha)"
+  - Ensure `Dry::Monitor::Rack::Middleware` is compatible with `Rack::Builder#use`
+    (@jodosha)
   changed:
-    - "Performance improvements (@davydovanton)"
+  - Performance improvements (@davydovanton)
 - version: 0.3.1
   date: '2019-06-18'
   fixed:
