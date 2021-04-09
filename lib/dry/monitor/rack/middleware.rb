@@ -14,9 +14,7 @@ module Dry
         Notifications.register_event(REQUEST_STOP)
         Notifications.register_event(REQUEST_ERROR)
 
-        attr_reader :app
-
-        attr_reader :notifications
+        attr_reader :app, :notifications
 
         def initialize(*args)
           @notifications, @app = *args

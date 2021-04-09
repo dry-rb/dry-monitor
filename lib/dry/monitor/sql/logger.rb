@@ -40,9 +40,7 @@ module Dry
         setting :theme, nil
         setting :message_template, %(  Loaded %s in %sms %s)
 
-        attr_reader :config
-        attr_reader :logger
-        attr_reader :template
+        attr_reader :config, :logger, :template
 
         load_extensions(:default_colorizer)
 

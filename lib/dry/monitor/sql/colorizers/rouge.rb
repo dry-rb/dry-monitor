@@ -15,8 +15,7 @@ module Dry
     module SQL
       module Colorizers
         class Rouge
-          attr_reader :formatter
-          attr_reader :lexer
+          attr_reader :formatter, :lexer
 
           def initialize(theme)
             @formatter = ::Rouge::Formatters::Terminal256.new(theme || ::Rouge::Themes::Gruvbox.new)
