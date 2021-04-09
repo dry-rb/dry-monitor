@@ -22,9 +22,7 @@ module Dry
     class Notifications
       include Events::Publisher["Dry::Monitor::Notifications"]
 
-      attr_reader :id
-
-      attr_reader :clock
+      attr_reader :id, :clock
 
       def initialize(id)
         @id = id
@@ -39,8 +37,8 @@ module Dry
         instrument(event_id, payload)
       end
 
-      def instrument(event_id, payload = EMPTY_HASH)
-        result, time = @clock.measure { yield } if block_given?
+      def instrument(event_id, payload = EMPTY_HASH, &block)
+        result, time = @clock.measure(&block) if block_given?
 
         process(event_id, payload) do |event, listener|
           if time

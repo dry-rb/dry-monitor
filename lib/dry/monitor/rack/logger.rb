@@ -21,9 +21,7 @@ module Dry
         QUERY_MSG = %(  Query parameters )
         FILTERED = "[FILTERED]"
 
-        attr_reader :logger
-
-        attr_reader :config
+        attr_reader :logger, :config
 
         def initialize(logger, config = self.class.config)
           @logger = logger
