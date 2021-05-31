@@ -32,6 +32,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "dry-configurable", "~> 0.5"
   spec.add_runtime_dependency "dry-core", "~> 0.5", ">= 0.5"
   spec.add_runtime_dependency "dry-events", "~> 0.2"
+
   spec.add_development_dependency "bundler"
   spec.add_development_dependency "rake"
   spec.add_development_dependency "rouge", "~> 2.0", ">= 2.2.1"
