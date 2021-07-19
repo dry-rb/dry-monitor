@@ -8,7 +8,7 @@
 # dry-monitor [![Join the chat at https://dry-rb.zulipchat.com](https://img.shields.io/badge/dry--rb-join%20chat-%23346b7a.svg)][chat]
 
 [![Gem Version](https://badge.fury.io/rb/dry-monitor.svg)][gem]
-[![CI Status](https://github.com/dry-rb/dry-monitor/workflows/ci/badge.svg)][actions]
+[![CI Status](https://github.com/dry-rb/dry-monitor/workflows/CI/badge.svg)][actions]
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/984c4274e56d423a818e7a1bf5e963d0)][codacy]
 [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/984c4274e56d423a818e7a1bf5e963d0)][codacy]
 [![Inline docs](http://inch-ci.org/github/dry-rb/dry-monitor.svg?branch=master)][inchpages]
