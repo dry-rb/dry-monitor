@@ -1,7 +1,11 @@
 ---
+- version: 0.5.0
+  date: '2021-09-12'
+  changed:
+  - '[internal] Upgraded to new `setting` API provided in dry-configurable 0.13.0 (@timriley in #43)'
 - version: 0.4.0
   summary:
-  date:
+  date: '2021-04-09'
   fixed:
   - Compatibility with MRI 3.0 (@alex-damian-negru)
   added:
