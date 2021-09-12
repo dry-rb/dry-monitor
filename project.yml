@@ -11,5 +11,5 @@ gemspec:
     - [rouge, "~> 2.0", ">= 2.2.1"]
   runtime_dependencies:
     - [dry-core, "~> 0.5", ">= 0.5"]
-    - [dry-configurable, "~> 0.5"]
+    - [dry-configurable, "~> 0.13", ">= 0.13.0"]
     - [dry-events, "~> 0.2"]
