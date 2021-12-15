@@ -22,20 +22,15 @@ Shrine.plugin :instrumentation, monitor: Dry::Monitor::Notifications.new(:my_app
 You can easily instrument GraphQL applications with `dry-monitor` with a simple custom tracer.
 
 ```ruby
-require 'dry-monitor'
+require 'dry/system/container'
 
-$notifications = Dry::Monitor::Notifications.new(:my_app)
-$notifications.register_event(:graphql)
-
-class DryTracer
-  def self.trace(key, metadata)
-    payload = { event_name: event_name, **metadata }
-
-    $notifications.instrument(:graphql, payload) { yield }
-  end
+# system/boot/container.rb
+class App < Dry::System::Container
+  use :notifications
 end
 
+# app/my_schema.rb
 class MySchema < GraphQL::Schema
-  tracer(DryTracer)
+  tracer GraphQL::Tracing::NotificationsTracing.new(App[:notifications])
 end
 ```
