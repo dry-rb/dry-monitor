@@ -11,7 +11,7 @@
 [![CI Status](https://github.com/dry-rb/dry-monitor/workflows/ci/badge.svg)][actions]
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/984c4274e56d423a818e7a1bf5e963d0)][codacy]
 [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/984c4274e56d423a818e7a1bf5e963d0)][codacy]
-[![Inline docs](http://inch-ci.org/github/dry-rb/dry-monitor.svg?branch=master)][inchpages]
+[![Inline docs](http://inch-ci.org/github/dry-rb/dry-monitor.svg?branch=main)][inchpages]
 
 ## Links
 
