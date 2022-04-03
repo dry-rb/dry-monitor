@@ -6,7 +6,7 @@ eval_gemfile "Gemfile.devtools"
 
 gemspec
 
-gem "dry-events", github: "dry-rb/dry-events", branch: "master"
+gem "dry-events", github: "dry-rb/dry-events", branch: "main"
 
 group :test do
   gem "rack"
