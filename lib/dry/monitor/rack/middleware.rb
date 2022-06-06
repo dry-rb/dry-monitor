@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "dry/monitor/notifications"
-
 module Dry
   module Monitor
     module Rack

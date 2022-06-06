@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "dry/events/publisher"
-require "dry/monitor/constants"
 
 module Dry
   module Monitor
