@@ -1,20 +1,37 @@
 # frozen_string_literal: true
 
-require "dry/monitor/logger"
-require "dry/monitor/notifications"
 require "dry/core/extensions"
+require "dry/core/constants"
+require "zeitwerk"
 
 module Dry
   module Monitor
     extend Dry::Core::Extensions
+    include Dry::Core::Constants
 
     register_extension(:rack) do
       require "rack/utils"
-      require "dry/monitor/rack/logger"
+
+      Dry::Monitor::Rack::Logger
     end
 
     register_extension(:sql) do
-      require "dry/monitor/sql/logger"
+      Dry::Monitor::SQL::Logger
+    end
+
+    class << self
+      def loader
+        @loader ||= Zeitwerk::Loader.new.tap do |loader|
+          root = File.expand_path("..", __dir__)
+          loader.tag = "dry-monitor"
+          loader.inflector = Zeitwerk::GemInflector.new("#{root}/dry-monitor.rb")
+          loader.push_dir(root)
+          loader.ignore("#{root}/dry-monitor.rb")
+          loader.inflector.inflect "sql" => "SQL"
+        end
+      end
     end
   end
 end
+
+Dry::Monitor.loader.setup
