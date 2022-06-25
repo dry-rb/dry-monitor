@@ -1,4 +1,9 @@
 ---
+- version: unreleased
+  summary:
+  date:
+  added:
+  - "Zeitwerk integration :tada: so that you can simply do `require \"dry/monitor\"` and other constants will be auto-loaded on demand (via #47) (@gmcgibbon)"
 - version: 0.5.0
   date: '2021-09-12'
   changed:
