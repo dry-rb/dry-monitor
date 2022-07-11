@@ -1,4 +1,8 @@
 ---
+- version: 0.6.1
+  date: "2022-07-11"
+  fixed:
+    - "Include dry-core's constants in Notifications (fixes #46) (@solnic)"
 - version: 0.6.0
   summary:
   date: "2022-07-10"
