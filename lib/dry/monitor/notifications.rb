@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "dry/core/constants"
 require "dry/events/publisher"
 
 module Dry
@@ -19,6 +20,7 @@ module Dry
     CLOCK = Clock.new
 
     class Notifications
+      include Core::Constants
       include Events::Publisher["Dry::Monitor::Notifications"]
 
       attr_reader :id, :clock

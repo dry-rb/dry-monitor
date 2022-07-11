@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
+require "zeitwerk"
+
 require "dry/core/extensions"
 require "dry/core/constants"
-require "zeitwerk"
 
 module Dry
   module Monitor
@@ -19,16 +20,14 @@ module Dry
       Dry::Monitor::SQL::Logger
     end
 
-    class << self
-      def loader
-        @loader ||= Zeitwerk::Loader.new.tap do |loader|
-          root = File.expand_path("..", __dir__)
-          loader.tag = "dry-monitor"
-          loader.inflector = Zeitwerk::GemInflector.new("#{root}/dry-monitor.rb")
-          loader.push_dir(root)
-          loader.ignore("#{root}/dry-monitor.rb")
-          loader.inflector.inflect "sql" => "SQL"
-        end
+    def self.loader
+      @loader ||= Zeitwerk::Loader.new.tap do |loader|
+        root = File.expand_path("..", __dir__)
+        loader.tag = "dry-monitor"
+        loader.inflector = Zeitwerk::GemInflector.new("#{root}/dry-monitor.rb")
+        loader.push_dir(root)
+        loader.ignore("#{root}/dry-monitor.rb")
+        loader.inflector.inflect "sql" => "SQL"
       end
     end
   end
