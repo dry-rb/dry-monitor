@@ -30,7 +30,7 @@ Gem::Specification.new do |spec|
 
   # to update dependencies edit project.yml
   spec.add_runtime_dependency "dry-configurable", "~> 0.13", ">= 0.13.0"
-  spec.add_runtime_dependency "dry-core", "~> 0.5", ">= 0.5"
+  spec.add_runtime_dependency "dry-core", ">= 0.9"
   spec.add_runtime_dependency "dry-events", "~> 0.2"
 
   spec.add_development_dependency "bundler"
