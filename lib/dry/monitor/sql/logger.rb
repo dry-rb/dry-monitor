@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-require "dry-configurable"
-require "dry/core/extensions"
+require "dry/configurable"
 
 module Dry
   module Monitor

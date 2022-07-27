@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 require "zeitwerk"
-
-require "dry/core/extensions"
-require "dry/core/constants"
+require "dry/core"
 
 module Dry
   module Monitor
