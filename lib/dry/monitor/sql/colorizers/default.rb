@@ -5,7 +5,9 @@ module Dry
     module SQL
       module Colorizers
         class Default
+          # rubocop:disable Style/RedundantInitialize
           def initialize(_theme); end
+          # rubocop:enable Style/RedundantInitialize
 
           def call(string)
             string

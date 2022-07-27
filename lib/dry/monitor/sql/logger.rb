@@ -11,6 +11,7 @@ module Dry
         extend Dry::Core::Extensions
         extend Dry::Configurable
 
+        # rubocop:disable Lint/ConstantDefinitionInBlock
         register_extension(:default_colorizer) do
           module DefaultColorizer
             def colorizer
@@ -30,6 +31,7 @@ module Dry
 
           Logger.include(RougeColorizer)
         end
+        # rubocop:enable Lint/ConstantDefinitionInBlock
 
         setting :theme
         setting :message_template, default: %(  Loaded %s in %sms %s)

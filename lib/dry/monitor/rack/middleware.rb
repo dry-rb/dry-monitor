@@ -4,9 +4,9 @@ module Dry
   module Monitor
     module Rack
       class Middleware
-        REQUEST_START = :'rack.request.start'
-        REQUEST_STOP = :'rack.request.stop'
-        REQUEST_ERROR = :'rack.request.error'
+        REQUEST_START = :"rack.request.start"
+        REQUEST_STOP = :"rack.request.stop"
+        REQUEST_ERROR = :"rack.request.error"
 
         Notifications.register_event(REQUEST_START)
         Notifications.register_event(REQUEST_STOP)
