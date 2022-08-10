@@ -2,6 +2,7 @@
 
 require "zeitwerk"
 require "dry/core"
+require "dry/monitor/version"
 
 module Dry
   module Monitor
@@ -24,7 +25,7 @@ module Dry
         loader.tag = "dry-monitor"
         loader.inflector = Zeitwerk::GemInflector.new("#{root}/dry-monitor.rb")
         loader.push_dir(root)
-        loader.ignore("#{root}/dry-monitor.rb")
+        loader.ignore("#{root}/dry-monitor.rb", "#{root}/dry/monitor/version.rb")
         loader.inflector.inflect "sql" => "SQL"
       end
     end
