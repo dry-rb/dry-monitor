@@ -2,6 +2,7 @@
 
 require "zeitwerk"
 require "dry/core"
+require "dry/configurable"
 require "dry/monitor/version"
 
 module Dry

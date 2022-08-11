@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "dry/configurable"
 require "dry/monitor/rack/middleware"
 
 module Dry

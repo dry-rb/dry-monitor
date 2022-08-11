@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "dry/configurable"
-
 module Dry
   module Monitor
     Notifications.register_event(:sql)
