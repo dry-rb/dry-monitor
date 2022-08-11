@@ -29,7 +29,7 @@ module Dry
           "#{root}/dry-monitor.rb",
           "#{root}/dry/monitor/version.rb",
           "#{root}/dry/monitor/rack/**/*.rb",
-          "#{root}/dry/monitor/sql/**/*.rb",
+          "#{root}/dry/monitor/sql/**/*.rb"
         )
         loader.inflector.inflect "sql" => "SQL"
       end
