@@ -13,6 +13,8 @@ module Dry
         extend Dry::Configurable
 
         register_extension(:default_colorizer) do
+          require "dry/monitor/sql/colorizers/default"
+
           module DefaultColorizer
             def colorizer
               @colorizer ||= Colorizers::Default.new(config.theme)
@@ -23,6 +25,8 @@ module Dry
         end
 
         register_extension(:rouge_colorizer) do
+          require "dry/monitor/sql/colorizers/rouge"
+
           module RougeColorizer
             def colorizer
               @colorizer ||= Colorizers::Rouge.new(config.theme)

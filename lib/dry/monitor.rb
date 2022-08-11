@@ -13,12 +13,11 @@ module Dry
 
     register_extension(:rack) do
       require "rack/utils"
-
-      Dry::Monitor::Rack::Logger
+      require "dry/monitor/rack/logger"
     end
 
     register_extension(:sql) do
-      Dry::Monitor::SQL::Logger
+      require "dry/monitor/sql/logger"
     end
 
     def self.loader
@@ -27,7 +26,12 @@ module Dry
         loader.tag = "dry-monitor"
         loader.inflector = Zeitwerk::GemInflector.new("#{root}/dry-monitor.rb")
         loader.push_dir(root)
-        loader.ignore("#{root}/dry-monitor.rb", "#{root}/dry/monitor/version.rb")
+        loader.ignore(
+          "#{root}/dry-monitor.rb",
+          "#{root}/dry/monitor/version.rb",
+          "#{root}/dry/monitor/rack/**/*.rb",
+          "#{root}/dry/monitor/sql/**/*.rb",
+        )
         loader.inflector.inflect "sql" => "SQL"
       end
     end
