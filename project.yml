@@ -12,4 +12,4 @@ gemspec:
   runtime_dependencies:
     - [dry-core, ">= 1.0.0.rc1", "< 2"]
     - [dry-configurable, ">= 1.0.0.rc1", "< 2"]
-    - [dry-events, "~> 0.4"]
+    - [dry-events, "~> 0.5"]
