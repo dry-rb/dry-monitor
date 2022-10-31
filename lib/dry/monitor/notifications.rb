@@ -4,18 +4,6 @@ require "dry/events/publisher"
 
 module Dry
   module Monitor
-    class Clock
-      def measure
-        start = current
-        result = yield
-        [result, current - start]
-      end
-
-      def current
-        Process.clock_gettime(Process::CLOCK_MONOTONIC, :millisecond)
-      end
-    end
-
     CLOCK = Clock.new
 
     class Notifications
