@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "zeitwerk"
+
 require "dry/core"
 require "dry/configurable"
 require "dry/monitor/version"
@@ -19,6 +20,7 @@ module Dry
       require "dry/monitor/sql/logger"
     end
 
+    # @api private
     def self.loader
       @loader ||= Zeitwerk::Loader.new.tap do |loader|
         root = File.expand_path("..", __dir__)
@@ -34,7 +36,7 @@ module Dry
         loader.inflector.inflect "sql" => "SQL"
       end
     end
+
+    loader.setup
   end
 end
-
-Dry::Monitor.loader.setup
