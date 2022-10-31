@@ -6,7 +6,6 @@ gemspec:
   summary: "Monitoring and instrumentation APIs"
   development_dependencies:
     - bundler
-    - rake
     - rspec
     - [rouge, "~> 2.0", ">= 2.2.1"]
   runtime_dependencies:
