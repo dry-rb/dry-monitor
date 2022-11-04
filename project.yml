@@ -9,6 +9,6 @@ gemspec:
     - rspec
     - [rouge, "~> 2.0", ">= 2.2.1"]
   runtime_dependencies:
-    - [dry-core, ">= 1.0.0.rc1", "< 2"]
-    - [dry-configurable, ">= 1.0.0.rc1", "< 2"]
+    - [dry-core, "~> 1.0", "< 2"]
+    - [dry-configurable, "~> 1.0", "< 2"]
     - [dry-events, ">= 1.0.0.rc1", "< 2"]
