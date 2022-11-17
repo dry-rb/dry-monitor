@@ -1,11 +1,11 @@
 ---
-- version: unreleased
-  summary: 
-  date: 
-  fixed: 
+- version: 1.0.1
+  summary:
+  date: 2022-11-17
+  fixed:
   added:
   - 'Extend Clock with support for configurable units (via #50) (@solnic)'
-  changed: 
+  changed:
 - version: 1.0.0
   date: '2022-11-04'
   changed:
@@ -29,7 +29,7 @@
   fixed:
   - 'Include dry-core''s constants in Notifications (fixes #46) (@solnic)'
 - version: 0.6.0
-  summary: 
+  summary:
   date: '2022-07-10'
   added:
   - 'Zeitwerk integration :tada: so that you can simply do `require "dry/monitor"`
@@ -40,12 +40,12 @@
   - "[internal] Upgraded to new `setting` API provided in dry-configurable 0.13.0
     (@timriley in #43)"
 - version: 0.4.0
-  summary: 
+  summary:
   date: '2021-04-09'
   fixed:
   - Compatibility with MRI 3.0 (@alex-damian-negru)
-  added: 
-  changed: 
+  added:
+  changed:
 - version: 0.3.2
   date: '2020-04-09'
   fixed:
