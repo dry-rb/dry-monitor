@@ -3,10 +3,16 @@
 require "rack/builder"
 
 RSpec.describe Dry::Monitor::Rack::Middleware do
-  subject(:middleware) { Dry::Monitor::Rack::Middleware.new(notifications).new(rack_app) }
+  subject(:middleware) do
+    Dry::Monitor::Rack::Middleware.new(notifications).new(rack_app, clock: clock)
+  end
 
   let(:notifications) do
-    Dry::Monitor::Notifications.new(:test)
+    Dry::Monitor::Notifications.new(:test, clock: clock)
+  end
+
+  let(:clock) do
+    Dry::Monitor::Clock.new(unit: :microsecond)
   end
 
   let(:rack_app) do
@@ -44,7 +50,7 @@ RSpec.describe Dry::Monitor::Rack::Middleware do
 
   describe "#new" do
     let(:builder) do
-      middleware = described_class.new(notifications)
+      middleware = described_class.new(notifications, clock: clock)
       inner = rack_app
 
       Rack::Builder.new do

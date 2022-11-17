@@ -12,9 +12,9 @@ module Dry
 
       attr_reader :id, :clock
 
-      def initialize(id)
+      def initialize(id, clock: CLOCK)
         @id = id
-        @clock = CLOCK
+        @clock = clock
       end
 
       def start(event_id, payload)
