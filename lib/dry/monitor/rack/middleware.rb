@@ -14,12 +14,13 @@ module Dry
 
         attr_reader :app, :notifications
 
-        def initialize(*args)
+        def initialize(*args, clock: CLOCK)
           @notifications, @app = *args
+          @clock = clock
         end
 
-        def new(app, *_args, &_block)
-          self.class.new(notifications, app)
+        def new(app, *_args, clock: @clock, &_block)
+          self.class.new(notifications, app, clock: clock)
         end
 
         def on(event_id, &block)
@@ -32,7 +33,7 @@ module Dry
 
         def call(env)
           notifications.start(REQUEST_START, env: env)
-          response, time = CLOCK.measure { app.call(env) }
+          response, time = @clock.measure { app.call(env) }
           notifications.stop(REQUEST_STOP, env: env, time: time, status: response[0])
           response
         end

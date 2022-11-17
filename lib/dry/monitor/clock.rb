@@ -4,6 +4,11 @@ module Dry
   module Monitor
     # @api public
     class Clock
+      # @api private
+      def initialize(unit: :millisecond)
+        @unit = unit
+      end
+
       # @api public
       def measure
         start = current
@@ -13,7 +18,7 @@ module Dry
 
       # @api public
       def current
-        Process.clock_gettime(Process::CLOCK_MONOTONIC, :millisecond)
+        Process.clock_gettime(Process::CLOCK_MONOTONIC, @unit)
       end
     end
   end

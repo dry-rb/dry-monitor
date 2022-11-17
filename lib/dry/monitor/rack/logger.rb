@@ -16,7 +16,7 @@ module Dry
         QUERY_STRING = "QUERY_STRING"
 
         START_MSG = %(Started %s "%s" for %s at %s)
-        STOP_MSG = %(Finished %s "%s" for %s in %sms [Status: %s]\n)
+        STOP_MSG = %(Finished %s "%s" for %s in %s [Status: %s]\n)
         QUERY_MSG = %(  Query parameters )
         FILTERED = "[FILTERED]"
 
