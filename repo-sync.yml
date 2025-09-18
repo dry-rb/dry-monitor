@@ -1,11 +1,16 @@
-name: dry-monitor
-codacy_id: 984c4274e56d423a818e7a1bf5e963d0
+name:
+  gem: dry-monitor
+  constant: Dry::Monitor
+github_org: dry-rb
 gemspec:
-  authors: ["Piotr Solnica"]
-  email: ["piotr.solnica@gmail.com"]
+  authors: ["Hanakai team"]
+  email: ["info@hanakai.org"]
   summary: "Monitoring and instrumentation APIs"
+  homepage: "https://dry-rb.org/gems/dry-monitor"
+  required_ruby_version: ">= 3.1.0"
   development_dependencies:
     - bundler
+    - rake
     - rspec
     - [rouge, "~> 2.0", ">= 2.2.1"]
   runtime_dependencies:

@@ -88,7 +88,12 @@ RSpec.describe Dry::Monitor::Rack::Middleware do
 
       expect(log_file_content).to include('Started GET "/hello-world"')
       expect(log_file_content).to include('Finished GET "/hello-world"')
-      expect(log_file_content).to include('Query parameters {"_csrf"=>"[FILTERED]", "password"=>"[FILTERED]", "user"=>{"password"=>"[FILTERED]"}, "others"=>[{"password"=>"[FILTERED]"}, {"password"=>"[FILTERED]"}], "foo"=>"bar", "one"=>"1", "ids"=>["1", "2"]}')
+
+      if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new("3.4.0")
+        expect(log_file_content).to include('Query parameters {"_csrf" => "[FILTERED]", "password" => "[FILTERED]", "user" => {"password" => "[FILTERED]"}, "others" => [{"password" => "[FILTERED]"}, {"password" => "[FILTERED]"}], "foo" => "bar", "one" => "1", "ids" => ["1", "2"]}')
+      else
+        expect(log_file_content).to include('Query parameters {"_csrf"=>"[FILTERED]", "password"=>"[FILTERED]", "user"=>{"password"=>"[FILTERED]"}, "others"=>[{"password"=>"[FILTERED]"}, {"password"=>"[FILTERED]"}], "foo"=>"bar", "one"=>"1", "ids"=>["1", "2"]}')
+      end
     end
   end
 
