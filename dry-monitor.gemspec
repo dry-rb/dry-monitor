@@ -36,6 +36,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake"
   spec.add_development_dependency "rspec"
   spec.add_development_dependency "rouge", "~> 2.0", ">= 2.2.1"
-  
 end
 
