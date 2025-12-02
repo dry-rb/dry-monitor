@@ -7,4 +7,4 @@ tmp/
 .idea/
 Gemfile.lock
 spec/test_logs/*.log
-.rubocop.yml
+/.rubocop-*

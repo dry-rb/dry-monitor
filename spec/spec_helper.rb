@@ -6,7 +6,8 @@ require_relative "support/coverage"
 
 begin
   require "byebug"
-rescue LoadError; end
+rescue LoadError;
+end
 require "dry-monitor"
 Dry::Monitor.load_extensions(:sql, :rack)
 
